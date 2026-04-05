@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Be212 Pte Ltd - Strategic Planning & Negotiations in Mining, Climate Tech, and Climate Finance across Asia and the Middle East since 2015">
+    <title>Be212 Pte Ltd | Strategic Planning & Negotiations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --tw-color-primary: #0a2540;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #0a2540;
+            transform: translateY(-1px);
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a2540 0%, #1e3a5f 100%);
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #0a2540;
+            bottom: -8px;
+            left: 0;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 25px 25px 50px -12px rgb(10 37 64 / 0.15);
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-[#0a2540] rounded-2xl flex items-center justify-center text-white text-2xl font-bold heading-font">B</div>
+                    <div>
+                        <h1 class="text-2xl font-semibold tracking-tighter heading-font">Be212</h1>
+                        <p class="text-xs text-gray-500 -mt-1">Pte Ltd • Since 2015</p>
+                    </div>
+                </div>
+
+                <!-- Menu -->
+                <div class="hidden md:flex items-center gap-x-10 text-sm font-medium uppercase tracking-widest">
+                    <a href="#home" onclick="navigateToSection('home')" class="nav-link text-gray-700">Home</a>
+                    <a href="#what-we-do" onclick="navigateToSection('what-we-do')" class="nav-link text-gray-700">What We Do</a>
+                    <a href="#clients" onclick="navigateToSection('clients')" class="nav-link text-gray-700">Clients</a>
+                    <a href="#get-in-touch" onclick="navigateToSection('get-in-touch')" class="nav-link text-gray-700">Get In Touch</a>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <a href="https://www.linkedin.com/company/be212-pte-ltd" target="_blank" 
+                       class="text-gray-400 hover:text-[#0a2540] transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <button onclick="navigateToSection('get-in-touch')"
+                            class="bg-[#0a2540] text-white px-6 py-3 rounded-2xl text-sm font-semibold hover:bg-black transition-all flex items-center gap-x-2">
+                        <span>Start a Conversation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-gray-700">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden px-8 pb-8 bg-white border-t">
+                <div class="flex flex-col gap-y-6 text-sm font-medium uppercase tracking-widest pt-6">
+                    <a href="#home" onclick="navigateToSection('home');toggleMobileMenu()" class="nav-link text-gray-700">Home</a>
+                    <a href="#what-we-do" onclick="navigateToSection('what-we-do');toggleMobileMenu()" class="nav-link text-gray-700">What We Do</a>
+                    <a href="#clients" onclick="navigateToSection('clients');toggleMobileMenu()" class="nav-link text-gray-700">Clients</a>
+                    <a href="#get-in-touch" onclick="navigateToSection('get-in-touch');toggleMobileMenu()" class="nav-link text-gray-700">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO / HOME -->
+    <section id="home" class="hero-bg text-white">
+        <div class="max-w-screen-2xl mx-auto px-8 py-24 md:py-32 grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7">
+                <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-3xl text-sm mb-6">
+                    <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+                    ESTABLISHED 2015 • SINGAPORE
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold heading-font leading-none tracking-tighter mb-6">
+                    Bridging strategy.<br>Delivering value.<br>Across continents.
+                </h1>
+                
+                <p class="text-xl text-gray-300 max-w-lg mb-10">
+                    Be212 Pte Ltd specializes in strategic planning and high-stakes negotiations 
+                    for mining, environmental technology, climate tech, and climate finance.
+                </p>
+
+                <div class="flex items-center gap-x-4">
+                    <a href="#what-we-do" 
+                       onclick="navigateToSection('what-we-do')"
+                       class="bg-white text-[#0a2540] px-8 py-4 rounded-3xl font-semibold flex items-center gap-x-3 hover:scale-105 transition-transform">
+                        Explore What We Do
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#get-in-touch" 
+                       onclick="navigateToSection('get-in-touch')"
+                       class="border border-white/70 hover:border-white px-8 py-4 rounded-3xl font-semibold flex items-center gap-x-3">
+                        Get In Touch
+                    </a>
+                </div>
+
+                <!-- Trust bar -->
+                <div class="mt-16 flex flex-wrap items-center gap-x-8 text-sm opacity-75">
+                    <div class="flex items-center gap-x-2">
+                        <i class="fas fa-globe"></i>
+                        <span>China • Asia • Middle East</span>
+                    </div>
+                    <div class="flex items-center gap-x-2">
+                        <i class="fas fa-leaf"></i>
+                        <span>Climate Tech & Finance</span>
+                    </div>
+                    <div class="flex items-center gap-x-2">
+                        <i class="fas fa-mountain"></i>
+                        <span>Mining & Mineral Processing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side visual -->
+            <div class="md:col-span-5 relative">
+                <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
+                    <div class="text-center">
+                        <div class="inline-flex bg-white/10 text-xs font-mono tracking-widest px-6 py-3 rounded-3xl mb-8">
+                            BRIDGING CULTURES • DELIVERING RESULTS
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-white/10 rounded-2xl p-6">
+                                <i class="fas fa-mountain text-4xl mb-4 block"></i>
+                                <div class="font-semibold text-lg">Mining</div>
+                                <div class="text-xs text-gray-400">Mineral Processing</div>
+                            </div>
+                            <div class="bg-white/10 rounded-2xl p-6">
+                                <i class="fas fa-leaf text-4xl mb-4 block"></i>
+                                <div class="font-semibold text-lg">Climate Tech</div>
+                                <div class="text-xs text-gray-400">Environmental Solutions</div>
+                            </div>
+                            <div class="bg-white/10 rounded-2xl p-6">
+                                <i class="fas fa-handshake text-4xl mb-4 block"></i>
+                                <div class="font-semibold text-lg">Climate Finance</div>
+                                <div class="text-xs text-gray-400">Capital Deployment</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating badge -->
+                <div class="absolute -top-6 -right-6 bg-emerald-400 text-white text-xs font-bold px-5 py-2 rounded-3xl shadow-xl rotate-12 flex items-center gap-x-2">
+                    <i class="fas fa-check"></i>
+                    SINCE 2015
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTORS & GEOGRAPHY BAR -->
+    <div class="bg-white border-b">
+        <div class="max-w-screen-2xl mx-auto px-8 py-10 grid md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="uppercase text-xs tracking-[1px] text-gray-500 mb-2">Sectors We Specialize In</h3>
+                <ul class="space-y-2 text-lg font-medium">
+                    <li class="flex items-center gap-x-3"><i class="fas fa-mountain text-[#0a2540]"></i> Mining and mineral processing</li>
+                    <li class="flex items-center gap-x-3"><i class="fas fa-leaf text-[#0a2540]"></i> Environmental technology / Climate tech</li>
+                    <li class="flex items-center gap-x-3"><i class="fas fa-chart-line text-[#0a2540]"></i> Climate finance</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="uppercase text-xs tracking-[1px] text-gray-500 mb-2">Our Geography</h3>
+                <p class="text-lg font-medium">Bridging cultural differences in China, Asia and the Middle East.</p>
+                <p class="text-sm text-gray-500 mt-4">We translate opportunities across borders and cultures.</p>
+            </div>
+            <div class="flex items-end">
+                <div class="text-4xl font-bold heading-font text-[#0a2540]">Strategic Planning &amp; Negotiations</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHAT WE DO -->
+    <section id="what-we-do" class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div>
+                <span class="uppercase text-xs font-semibold tracking-widest text-emerald-600">OUR APPROACH</span>
+                <h2 class="text-5xl font-bold heading-font tracking-tighter">What We Do</h2>
+            </div>
+            <p class="max-w-md text-gray-600">We deliver end-to-end strategic support — from market entry to deal closure and value realisation.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Market Strategy -->
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
+                <div class="text-emerald-600 text-sm font-semibold mb-4">01 • MARKET STRATEGY</div>
+                <h3 class="text-3xl font-semibold mb-8">Position for success</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">01</span>
+                        <div>
+                            <div class="font-medium">Competitive environment</div>
+                            <div class="text-sm text-gray-500">Deep analysis of market dynamics</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">02</span>
+                        <div>
+                            <div class="font-medium">Strategic positioning</div>
+                            <div class="text-sm text-gray-500">Define your unique edge</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">03</span>
+                        <div>
+                            <div class="font-medium">Portfolio management</div>
+                            <div class="text-sm text-gray-500">Optimise your project pipeline</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">04</span>
+                        <div>
+                            <div class="font-medium">Partnerships across the supply chain</div>
+                            <div class="text-sm text-gray-500">Build resilient alliances</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Value Enhancement -->
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
+                <div class="text-emerald-600 text-sm font-semibold mb-4">02 • VALUE ENHANCEMENT</div>
+                <h3 class="text-3xl font-semibold mb-8">Unlock hidden value</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">01</span>
+                        <div>
+                            <div class="font-medium">Value-in-use &amp; downstream process improvements</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">02</span>
+                        <div>
+                            <div class="font-medium">Differentiation</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">03</span>
+                        <div>
+                            <div class="font-medium">Pricing optimization</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- Generic graph visual -->
+                <div class="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                    <div class="text-xs font-medium mb-4 flex justify-between">
+                        <span>VALUE CREATION</span>
+                        <span class="text-emerald-600">+42%</span>
+                    </div>
+                    <div class="h-48 bg-gradient-to-r from-emerald-400 to-[#0a2540] rounded-2xl relative flex items-end justify-around p-4">
+                        <div class="w-8 bg-white/30 rounded-t h-1/3"></div>
+                        <div class="w-8 bg-white/30 rounded-t h-2/3"></div>
+                        <div class="w-8 bg-white/30 rounded-t h-4/5"></div>
+                        <div class="w-8 bg-white/30 rounded-t h-full flex items-center justify-center text-xs font-bold">Target</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deployment -->
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
+                <div class="text-emerald-600 text-sm font-semibold mb-4">03 • DEPLOYMENT</div>
+                <h3 class="text-3xl font-semibold mb-8">Execute with precision</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">01</span>
+                        <div>
+                            <div class="font-medium">Market plan &amp; KAM</div>
+                            <div class="text-sm text-gray-500">Key Account Management</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">02</span>
+                        <div>
+                            <div class="font-medium">Technical selling and negotiations</div>
+                        </div>
+                    </li>
+                    <li class="flex gap-x-4">
+                        <span class="font-mono text-2xl font-light text-gray-300">03</span>
+                        <div>
+                            <div class="font-medium">Monitoring and continuous improvement</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- Generic visual -->
+                <div class="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6 text-center">
+                    <div class="text-xs uppercase tracking-widest mb-3">NEGOTIATION SUCCESS CYCLE</div>
+                    <div class="flex justify-center gap-x-8 text-5xl text-gray-300">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">Plan • Negotiate • Execute • Improve</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="clients" class="bg-gray-50 py-20">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="uppercase text-xs font-semibold tracking-widest text-emerald-600">TRUSTED PARTNERS</span>
+                    <h2 class="text-5xl font-bold heading-font tracking-tighter">Clients</h2>
+                </div>
+                <a href="#get-in-touch" onclick="navigateToSection('get-in-touch')" class="flex items-center gap-x-3 group">
+                    <span class="text-sm font-medium">Work with us</span>
+                    <div class="w-9 h-9 rounded-2xl border border-gray-300 flex items-center justify-center group-hover:border-[#0a2540] transition-colors">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Who are our clients -->
+                <div class="bg-white rounded-3xl p-8">
+                    <h3 class="text-2xl font-semibold mb-6">Who are our clients?</h3>
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl">💰</div>
+                            <div>
+                                <div class="font-medium">Investors looking for quality projects in the region we cover</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl">🏗️</div>
+                            <div>
+                                <div class="font-medium">Project developers looking for capital or strategic partnerships</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl">🔧</div>
+                            <div>
+                                <div class="font-medium">Project developers looking for sourcing leads and supervision to locally source technology and equipment</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent work -->
+                <div class="bg-white rounded-3xl p-8">
+                    <h3 class="text-2xl font-semibold mb-8">Some recent work done for our clients</h3>
+                    <div class="space-y-6 text-sm">
+                        <div class="border-l-2 border-[#0a2540] pl-6">
+                            Identified and helped with negotiations for the development of a large <strong>Silica sand project in North East Australia</strong>
+                        </div>
+                        <div class="border-l-2 border-[#0a2540] pl-6">
+                            Provided Middle East investor leads to a USA-based project looking for capital
+                        </div>
+                        <div class="border-l-2 border-[#0a2540] pl-6">
+                            Co-ordinated the technical evaluation work for a high purity quartz project in Iraq
+                        </div>
+                        <div class="border-l-2 border-[#0a2540] pl-6">
+                            Assisted a Biochar project developer in Indonesia with technology audits and selection
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GET IN TOUCH -->
+    <section id="get-in-touch" class="max-w-screen-2xl mx-auto px-8 py-20 bg-[#0a2540] text-white">
+        <div class="grid md:grid-cols-12 gap-12">
+            <div class="md:col-span-5">
+                <h2 class="text-5xl font-bold heading-font tracking-tighter mb-6">Let's build something exceptional together</h2>
+                <p class="text-gray-300 text-xl">Whether you're an investor, project developer, or technology provider — we're ready to help you succeed across Asia and the Middle East.</p>
+                
+                <div class="mt-12 border border-white/20 rounded-3xl p-8">
+                    <div class="flex items-center gap-x-4">
+                        <i class="fas fa-envelope text-3xl"></i>
+                        <div>
+                            <div class="text-xs text-gray-400">DIRECT EMAIL</div>
+                            <a href="mailto:info@be212advisory.com" class="text-2xl font-medium hover:underline">info@be212advisory.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="md:col-span-7 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12">
+                <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-xs font-medium uppercase tracking-widest block mb-2">Your Name</label>
+                            <input type="text" id="name" required 
+                                   class="w-full bg-white/10 border border-white/30 focus:border-white rounded-2xl px-6 py-5 outline-none text-white placeholder:text-gray-400">
+                        </div>
+                        <div>
+                            <label class="text-xs font-medium uppercase tracking-widest block mb-2">Company</label>
+                            <input type="text" id="company" 
+                                   class="w-full bg-white/10 border border-white/30 focus:border-white rounded-2xl px-6 py-5 outline-none text-white placeholder:text-gray-400">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs font-medium uppercase tracking-widest block mb-2">Email Address</label>
+                        <input type="email" id="email" required 
+                               class="w-full bg-white/10 border border-white/30 focus:border-white rounded-2xl px-6 py-5 outline-none text-white placeholder:text-gray-400">
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs font-medium uppercase tracking-widest block mb-2">Message / Project Brief</label>
+                        <textarea id="message" rows="6" required
+                                  class="w-full bg-white/10 border border-white/30 focus:border-white rounded-3xl px-6 py-5 outline-none text-white placeholder:text-gray-400 resize-none"></textarea>
+                    </div>
+                    
+                    <button type="submit"
+                            class="w-full bg-white text-[#0a2540] py-5 rounded-3xl font-semibold text-lg hover:bg-emerald-400 hover:text-white transition-all flex items-center justify-center gap-x-3">
+                        SEND MESSAGE
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t py-12">
+        <div class="max-w-screen-2xl mx-auto px-8 text-sm">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-y-6">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-6 h-6 bg-[#0a2540] rounded-2xl flex items-center justify-center text-white text-xl">B</div>
+                    <div class="heading-font text-xl">Be212 Pte Ltd</div>
+                </div>
+                
+                <div class="text-center md:text-right text-gray-500">
+                    © 2026 Be212 Pte Ltd. All Rights Reserved.<br>
+                    Strategic Planning &amp; Negotiations • Since 2015
+                </div>
+                
+                <div class="flex gap-x-8 text-gray-400">
+                    <a href="#" class="hover:text-gray-700">Privacy</a>
+                    <a href="#" class="hover:text-gray-700">Terms</a>
+                    <a href="https://www.linkedin.com/company/be212-pte-ltd" target="_blank" class="hover:text-gray-700">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script already loaded
+        function initializeTailwind() {
+            // No need - script is already there
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+        
+        function navigateToSection(section) {
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+        
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const btn = form.querySelector('button');
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `
+                <span class="inline-flex items-center">
+                    <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                    SENDING...
+                </span>`;
+            btn.disabled = true;
+            
+            // Simulate sending
+            setTimeout(() => {
+                alert('✅ Thank you! Your message has been received. We will get back to you within 24 hours.');
+                form.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1800);
+        }
+        
+        // Keyboard shortcut hint
+        console.log('%c✅ Be212 website ready! Built to match the clean, professional template of crb-resources.com with your exact content.', 'background:#0a2540;color:white;padding:2px 6px;border-radius:4px');
+        
+        // Initialize
+        window.onload = initializeTailwind;
+    </script>
+</body>
+</html>

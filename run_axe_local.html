@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Run axe-core on a local page</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Arial;max-width:900px;margin:2rem auto;padding:1rem}
+    textarea{width:100%;height:4rem}
+    pre{background:#111;color:#f7f7f7;padding:1rem;overflow:auto}
+    button{background:#0a2540;color:white;padding:.6rem 1rem;border-radius:8px;border:none}
+    .muted{color:#666}
+  </style>
+</head>
+<body>
+  <h1>axe-core accessibility runner</h1>
+  <p class="muted">Use this small tool to run <code>axe-core</code> against any URL (including local files) without installing Node. Open this file in Chrome, enter the URL of the page you want tested (for example <code>file:///d:/BE212WEBv1_refined.html</code>), then click Run scan.</p>
+
+  <label for="url">Page URL to scan</label>
+  <input id="url" value="file:///d:/BE212WEBv1_refined.html" />
+  <div style="height:12px"></div>
+  <button id="run">Run scan</button>
+  <button id="clear" style="margin-left:8px">Clear</button>
+
+  <h3>Results</h3>
+  <div id="summary" class="muted">No results yet.</div>
+  <pre id="output"> </pre>
+  <a id="downloadLink" style="display:none;margin-top:8px;" download="axe-report.json">Download JSON report</a>
+
+  <script>
+    // Load axe-core from a local file (preferred) then fall back to CDN.
+    async function loadAxe() {
+      if (window.axe) return;
+
+      function loadScript(src) {
+        return new Promise((res, rej) => {
+          const s = document.createElement('script');
+          s.src = src;
+          s.crossOrigin = 'anonymous';
+          s.onload = () => res();
+          s.onerror = () => rej(new Error('Failed to load ' + src));
+          document.head.appendChild(s);
+        });
+      }
+
+      // Try local file first (same folder as this HTML file)
+      try {
+        await loadScript('./axe.min.js');
+        return;
+      } catch (e) {
+        // local load failed — fall back to CDN
+      }
+
+      try {
+        await loadScript('https://unpkg.com/axe-core@4.8.4/axe.min.js');
+        return;
+      } catch (err) {
+        throw new Error('Failed to load axe-core from local file and CDN');
+      }
+    }
+
+    function formatSummary(report) {
+      const violations = report.violations.length;
+      const passes = report.passes.length;
+      const incomplete = report.incomplete.length;
+      const inapplicable = report.inapplicable.length;
+      return `Violations: ${violations} • Passed checks: ${passes} • Incomplete: ${incomplete} • Inapplicable: ${inapplicable}`;
+    }
+
+    document.getElementById('run').addEventListener('click', async () => {
+      const url = document.getElementById('url').value.trim();
+      if (!url) return alert('Please provide a URL to scan');
+
+      document.getElementById('summary').textContent = 'Loading axe-core...';
+      document.getElementById('output').textContent = '';
+      document.getElementById('downloadLink').style.display = 'none';
+
+      try {
+        await loadAxe();
+      } catch (err) {
+        document.getElementById('summary').textContent = 'Error loading axe-core: ' + err.message;
+        return;
+      }
+
+      // create an iframe to load the target page (isolated environment)
+      const iframe = document.createElement('iframe');
+      iframe.style.width = '100%';
+      iframe.style.height = '600px';
+      iframe.src = url;
+      iframe.title = 'scan-target';
+      iframe.onload = async () => {
+        try {
+          // inject axe script into the iframe's document if not present
+          if (!iframe.contentWindow.axe) {
+            const script = iframe.contentDocument.createElement('script');
+            script.textContent = window.axe.source || '';
+            // If axe source is empty (CDN doesn't expose), load via remote script in iframe
+            if (!script.textContent) {
+              const remote = iframe.contentDocument.createElement('script');
+              remote.src = 'https://unpkg.com/axe-core@4.8.4/axe.min.js';
+              await new Promise((r, rej) => { remote.onload = r; remote.onerror = rej; iframe.contentDocument.head.appendChild(remote); });
+            } else {
+              iframe.contentDocument.head.appendChild(script);
+            }
+          }
+
+          // run axe in the iframe context
+          const results = await iframe.contentWindow.axe.run();
+          document.getElementById('summary').textContent = formatSummary(results);
+          const pretty = JSON.stringify(results, null, 2);
+          document.getElementById('output').textContent = pretty;
+
+          // make a downloadable blob for the user
+          const blob = new Blob([pretty], { type: 'application/json' });
+          const urlBlob = URL.createObjectURL(blob);
+          const dl = document.getElementById('downloadLink');
+          dl.href = urlBlob;
+          dl.style.display = 'inline-block';
+
+        } catch (err) {
+          document.getElementById('summary').textContent = 'Error running axe: ' + err.message;
+        }
+      };
+
+      // add the iframe below the controls; remove any existing one
+      const existing = document.querySelector('iframe[title="scan-target"]');
+      if (existing) existing.remove();
+      document.body.appendChild(iframe);
+    });
+
+    document.getElementById('clear').addEventListener('click', () => {
+      document.getElementById('summary').textContent = 'No results yet.';
+      document.getElementById('output').textContent = '';
+      const dl = document.getElementById('downloadLink'); dl.style.display = 'none';
+      const existing = document.querySelector('iframe[title="scan-target"]'); if (existing) existing.remove();
+    });
+  </script>
+</body>
+</html>
