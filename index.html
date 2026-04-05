@@ -9,54 +9,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         :root { --tw-color-primary: #0a2540; }
-        body { font-family: 'Inter', system_ui, sans-serif; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
         .heading-font { font-family: 'Space Grotesk', sans-serif; }
         .nav-link { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .nav-link:hover { color: #0a2540; transform: translateY(-1px); }
         .hero-bg { background: linear-gradient(135deg, #0a2540 0%, #1e3a5f 100%); }
-        .section-header { position: relative; }
-        .section-header::after { content: ''; position: absolute; width: 60px; height: 3px; background: #0a2540; bottom: -8px; left: 0; }
         .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-hover:hover { transform: translateY(-8px); box-shadow: 25px 25px 50px -12px rgb(10 37 64 / 0.15); }
         .smooth-scroll { scroll-behavior: smooth; }
-
-        /* Small utility for screen-reader only text */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
-        /* Make focus outlines visible for keyboard users */
         :focus { outline: 3px solid rgba(10,37,64,0.12); outline-offset: 3px; }
         .focus-ring:focus { box-shadow: 0 0 0 4px rgba(10,37,64,0.08); }
+        /* Ensure hidden pages are truly hidden */
+        .page { display: none; }
     </style>
 </head>
 <body class="smooth-scroll">
     <a class="sr-only" href="#main">Skip to content</a>
 
-    <!-- Helpful banner shown when styles fail to load (common with file://). Hidden by default -->
-    <div id="styleWarning" style="display:none;position:fixed;left:12px;right:12px;bottom:12px;background:#fff7cc;border-left:4px solid #f0c000;padding:12px 16px;border-radius:8px;z-index:1000;box-shadow:0 6px 24px rgba(0,0,0,0.08);">
-        <div style="display:flex;align-items:center;gap:12px;">
-            <div style="flex:1">
-                <strong style="display:block;color:#6b5b00">Styles not loaded?</strong>
-                <div style="color:#6b5b00">It looks like Tailwind or external CSS did not load (this happens when opening the file with file://). Serving the folder over HTTP fixes this. </div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:center">
-                <button id="openReadme" style="background:#0a2540;color:white;border:none;padding:8px 12px;border-radius:6px;">Show instructions</button>
-                <button id="startServerBtn" style="background:#f0c000;border:none;padding:8px 12px;border-radius:6px;">Try start server</button>
-                <button id="dismissWarning" style="background:transparent;border:1px solid #e6d78a;padding:8px 12px;border-radius:6px;">Dismiss</button>
-            </div>
-        </div>
-    </div>
-
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm" role="banner">
         <div class="max-w-screen-2xl mx-auto">
             <div class="px-8 py-5 flex items-center justify-between">
-                <!-- Logo -->
                 <div class="flex items-center gap-x-3">
-                    <div class="w-9 h-9 rounded-2xl flex items-center justify-center overflow-hidden bg-white" aria-hidden="true">
-                        <!-- Put a real logo in assets/logo.png (keeps the B fallback) -->
+                    <div class="w-9 h-9 rounded-2xl flex items-center justify-center overflow-hidden bg-[#0a2540]" aria-hidden="true">
                         <img src="assets/logo.png" alt="Be212 logo" style="width:36px;height:36px;object-fit:contain" onerror="this.style.display='none'"/>
-                        <div class="text-white text-2xl font-bold heading-font" style="background:var(--tw-color-primary);width:36px;height:36px;display:flex;align-items:center;justify-content:center;" aria-hidden="true">B</div>
                     </div>
                     <div>
                         <h1 class="text-2xl font-semibold tracking-tighter heading-font">Be212</h1>
@@ -64,7 +42,6 @@
                     </div>
                 </div>
 
-                <!-- Menu (single-file pages using hash routing) -->
                 <nav aria-label="Main navigation" class="hidden md:flex items-center gap-x-10 text-sm font-medium uppercase tracking-widest">
                     <a href="#home" class="nav-link text-gray-700">Home</a>
                     <a href="#what-we-do" class="nav-link text-gray-700">What We Do</a>
@@ -80,17 +57,13 @@
                         <span>Start a conversation</span>
                         <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </button>
-                    <!-- Mobile menu button -->
                     <button id="mobileMenuButton" onclick="toggleMobileMenu()" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-2xl text-gray-700 focus-ring">
                         <i class="fas fa-bars" aria-hidden="true"></i>
                         <span class="sr-only">Open navigation menu</span>
                     </button>
                 </div>
             </div>
-            <!-- Mobile Menu -->
-                <footer class="bg-white border-t py-12" role="contentinfo">
-                    <div class="max-w-screen-2xl mx-auto px-8 text-sm">
-                        <div class="flex flex-col md:flex-row justify-between items-center gap-y-6">
+
             <div id="mobileMenu" class="hidden md:hidden px-8 pb-8 bg-white border-t" role="menu">
                 <div class="flex flex-col gap-y-6 text-sm font-medium uppercase tracking-widest pt-6">
                     <a href="#home" class="nav-link text-gray-700">Home</a>
@@ -103,152 +76,156 @@
     </header>
 
     <main id="main">
-    <!-- pages: home, what-we-do, clients, get-in-touch. Only one is visible at a time. -->
-    <section id="home" class="page hero-bg text-white">
-        <div class="max-w-screen-2xl mx-auto px-8 py-24 md:py-32 grid md:grid-cols-12 gap-12 items-center">
-            <div class="md:col-span-7">
-                <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-3xl text-sm mb-6">
-                    <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true"></span>
-                    ESTABLISHED 2015 • SINGAPORE
-                </div>
-                <h1 class="text-6xl md:text-7xl font-bold heading-font leading-none tracking-tighter mb-6">Bridging strategy.<br>Delivering value.<br>Across continents.</h1>
-                <p class="text-xl text-gray-300 max-w-lg mb-10">Be212 Pte Ltd specializes in strategic planning and high-stakes negotiations for mining, environmental technology, climate tech, and climate finance.</p>
 
-                <div class="flex items-center gap-x-4">
-                    <a href="#what-we-do" class="bg-white text-[#0a2540] px-8 py-4 rounded-3xl font-semibold flex items-center gap-x-3 hover:scale-105 transition-transform focus-ring">Explore what we do <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    <a href="#get-in-touch" class="border border-white/70 hover:border-white px-8 py-4 rounded-3xl font-semibold flex items-center gap-x-3 focus-ring">Get in touch</a>
+    <!-- ======== HOME ======== -->
+    <section id="home" class="page">
+
+        <!-- Hero -->
+        <div class="hero-bg text-white">
+            <div class="max-w-screen-2xl mx-auto px-8 py-24 md:py-32 grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7">
+                    <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-3xl text-sm mb-6">
+                        <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true"></span>
+                        ESTABLISHED 2015 • SINGAPORE
+                    </div>
+                    <h1 class="text-6xl md:text-7xl font-bold heading-font leading-none tracking-tighter mb-6">Bridging strategy.<br>Delivering value.<br>Across continents.</h1>
+                    <p class="text-xl text-gray-300 max-w-lg mb-10">Be212 Pte Ltd specializes in strategic planning and high-stakes negotiations for mining, environmental technology, climate tech, and climate finance.</p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#what-we-do" onclick="navigateToSection('what-we-do')" class="bg-white text-[#0a2540] px-8 py-4 rounded-3xl font-semibold flex items-center gap-x-3 hover:scale-105 transition-transform focus-ring">Explore what we do <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="#get-in-touch" onclick="navigateToSection('get-in-touch')" class="border border-white/70 hover:border-white px-8 py-4 rounded-3xl font-semibold flex items-center gap-x-3 focus-ring">Get in touch</a>
+                    </div>
+                    <div class="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm opacity-75">
+                        <div class="flex items-center gap-x-2"><i class="fas fa-globe" aria-hidden="true"></i><span>China • Asia • Middle East</span></div>
+                        <div class="flex items-center gap-x-2"><i class="fas fa-leaf" aria-hidden="true"></i><span>Climate Tech &amp; Finance</span></div>
+                        <div class="flex items-center gap-x-2"><i class="fas fa-mountain" aria-hidden="true"></i><span>Mining &amp; Mineral Processing</span></div>
+                    </div>
                 </div>
 
-                <!-- Trust bar -->
-                <div class="mt-16 flex flex-wrap items-center gap-x-8 text-sm opacity-75">
-                    <div class="flex items-center gap-x-2"><i class="fas fa-globe" aria-hidden="true"></i><span>China • Asia • Middle East</span></div>
-                    <div class="flex items-center gap-x-2"><i class="fas fa-leaf" aria-hidden="true"></i><span>Climate Tech & Finance</span></div>
-                    <div class="flex items-center gap-x-2"><i class="fas fa-mountain" aria-hidden="true"></i><span>Mining & Mineral Processing</span></div>
+                <div class="md:col-span-5 relative">
+                    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
+                        <div class="text-center">
+                            <div class="inline-flex bg-white/10 text-xs font-mono tracking-widest px-6 py-3 rounded-3xl mb-8">BRIDGING CULTURES • DELIVERING RESULTS</div>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="bg-white/10 rounded-2xl p-4"><i class="fas fa-mountain text-3xl mb-3 block" aria-hidden="true"></i><div class="font-semibold">Mining</div><div class="text-xs text-gray-400">Mineral Processing</div></div>
+                                <div class="bg-white/10 rounded-2xl p-4"><i class="fas fa-leaf text-3xl mb-3 block" aria-hidden="true"></i><div class="font-semibold">Climate Tech</div><div class="text-xs text-gray-400">Environmental Solutions</div></div>
+                                <div class="bg-white/10 rounded-2xl p-4"><i class="fas fa-handshake text-3xl mb-3 block" aria-hidden="true"></i><div class="font-semibold">Climate Finance</div><div class="text-xs text-gray-400">Capital Deployment</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-emerald-400 text-white text-xs font-bold px-5 py-2 rounded-3xl shadow-xl rotate-12 flex items-center gap-x-2">
+                        <i class="fas fa-check" aria-hidden="true"></i>SINCE 2015
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Right side visual -->
-            <div class="md:col-span-5 relative">
-                <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
-                    <div class="text-center">
-                        <div class="inline-flex bg-white/10 text-xs font-mono tracking-widest px-6 py-3 rounded-3xl mb-8">BRIDGING CULTURES • DELIVERING RESULTS</div>
-                        <div class="grid grid-cols-3 gap-4 text-center">
-                            <div class="bg-white/10 rounded-2xl p-6"><i class="fas fa-mountain text-4xl mb-4 block" aria-hidden="true"></i><div class="font-semibold text-lg">Mining</div><div class="text-xs text-gray-400">Mineral Processing</div></div>
-                            <div class="bg-white/10 rounded-2xl p-6"><i class="fas fa-leaf text-4xl mb-4 block" aria-hidden="true"></i><div class="font-semibold text-lg">Climate Tech</div><div class="text-xs text-gray-400">Environmental Solutions</div></div>
-                            <div class="bg-white/10 rounded-2xl p-6"><i class="fas fa-handshake text-4xl mb-4 block" aria-hidden="true"></i><div class="font-semibold text-lg">Climate Finance</div><div class="text-xs text-gray-400">Capital Deployment</div></div>
+        <!-- Sectors bar -->
+        <div class="bg-white border-b">
+            <div class="max-w-screen-2xl mx-auto px-8 py-10 grid md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="uppercase text-xs tracking-[1px] text-gray-500 mb-2">Sectors We Specialize In</h3>
+                    <ul class="space-y-2 text-lg font-medium">
+                        <li class="flex items-center gap-x-3"><i class="fas fa-mountain text-[#0a2540]" aria-hidden="true"></i> Mining and mineral processing</li>
+                        <li class="flex items-center gap-x-3"><i class="fas fa-leaf text-[#0a2540]" aria-hidden="true"></i> Environmental technology / Climate tech</li>
+                        <li class="flex items-center gap-x-3"><i class="fas fa-chart-line text-[#0a2540]" aria-hidden="true"></i> Climate finance</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="uppercase text-xs tracking-[1px] text-gray-500 mb-2">Our Geography</h3>
+                    <p class="text-lg font-medium">Bridging cultural differences in China, Asia and the Middle East.</p>
+                    <p class="text-sm text-gray-500 mt-4">We translate opportunities across borders and cultures.</p>
+                </div>
+                <div class="flex items-end justify-center md:justify-start">
+                    <div class="text-4xl font-bold heading-font text-[#0a2540]">Strategic Planning &amp; Negotiations</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home photo gallery — inside the home page section -->
+        <div class="bg-white py-10 px-8">
+            <div class="max-w-screen-2xl mx-auto">
+                <h3 class="text-lg font-semibold mb-4">On-the-ground work</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <img src="assets/photo1.jpg" alt="Site image 1" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+                    <img src="assets/photo2.jpg" alt="Site image 2" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+                    <img src="assets/photo3.jpg" alt="Site image 3" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+                    <img src="assets/photo4.jpg" alt="Site image 4" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ======== WHAT WE DO ======== -->
+    <section id="what-we-do" class="page bg-gray-50">
+        <div class="max-w-screen-2xl mx-auto px-8 py-20">
+            <div class="flex flex-col gap-4 md:flex-row md:justify-between md:items-end mb-12">
+                <div>
+                    <span class="uppercase text-xs font-semibold tracking-widest text-emerald-600">OUR APPROACH</span>
+                    <h2 class="text-5xl font-bold heading-font tracking-tighter text-left">What We Do</h2>
+                </div>
+                <p class="max-w-md text-gray-600">We deliver end-to-end strategic support — from market entry to deal closure and value realisation.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
+                    <div class="text-emerald-600 text-sm font-semibold mb-4">01 • MARKET STRATEGY</div>
+                    <h3 class="text-3xl font-semibold mb-8">Position for success</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">01</span><div class="min-w-0"><div class="font-medium">Competitive environment</div><div class="text-sm text-gray-500">Deep analysis of market dynamics</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">02</span><div class="min-w-0"><div class="font-medium">Strategic positioning</div><div class="text-sm text-gray-500">Define your unique edge</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">03</span><div class="min-w-0"><div class="font-medium">Portfolio management</div><div class="text-sm text-gray-500">Optimise your project pipeline</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">04</span><div class="min-w-0"><div class="font-medium">Partnerships across the supply chain</div><div class="text-sm text-gray-500">Build resilient alliances</div></div></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
+                    <div class="text-emerald-600 text-sm font-semibold mb-4">02 • VALUE ENHANCEMENT</div>
+                    <h3 class="text-3xl font-semibold mb-8">Unlock hidden value</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">01</span><div class="min-w-0"><div class="font-medium">Value-in-use &amp; downstream process improvements</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">02</span><div class="min-w-0"><div class="font-medium">Differentiation</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">03</span><div class="min-w-0"><div class="font-medium">Pricing optimization</div></div></li>
+                    </ul>
+                    <div class="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <div class="text-xs font-medium mb-4 flex justify-between"><span>VALUE CREATION</span><span class="text-emerald-600">+42%</span></div>
+                        <div class="h-48 bg-gradient-to-r from-emerald-400 to-[#0a2540] rounded-2xl relative flex items-end justify-around p-4" aria-hidden="true">
+                            <div class="w-8 bg-white/30 rounded-t h-1/3"></div>
+                            <div class="w-8 bg-white/30 rounded-t h-2/3"></div>
+                            <div class="w-8 bg-white/30 rounded-t h-4/5"></div>
+                            <div class="w-8 bg-white/30 rounded-t h-full flex items-center justify-center text-xs font-bold">Target</div>
                         </div>
                     </div>
                 </div>
-                <!-- Floating badge -->
-                <div class="absolute -top-6 -right-6 bg-emerald-400 text-white text-xs font-bold px-5 py-2 rounded-3xl shadow-xl rotate-12 flex items-center gap-x-2"><i class="fas fa-check" aria-hidden="true"></i><span class="sr-only">Since 2015</span>SINCE 2015</div>
-            </div>
-        </div>
-    </section>
 
-    <!-- SECTORS & GEOGRAPHY BAR (shown on home) -->
-    <div id="sectors" class="page bg-white border-b">
-        <div class="max-w-screen-2xl mx-auto px-8 py-10 grid md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-                <h3 class="uppercase text-xs tracking-[1px] text-gray-500 mb-2">Sectors We Specialize In</h3>
-                <ul class="space-y-2 text-lg font-medium">
-                    <li class="flex items-center gap-x-3"><i class="fas fa-mountain text-[#0a2540]" aria-hidden="true"></i> Mining and mineral processing</li>
-                    <li class="flex items-center gap-x-3"><i class="fas fa-leaf text-[#0a2540]" aria-hidden="true"></i> Environmental technology / Climate tech</li>
-                    <li class="flex items-center gap-x-3"><i class="fas fa-chart-line text-[#0a2540]" aria-hidden="true"></i> Climate finance</li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="uppercase text-xs tracking-[1px] text-gray-500 mb-2">Our Geography</h3>
-                <p class="text-lg font-medium">Bridging cultural differences in China, Asia and the Middle East.</p>
-                <p class="text-sm text-gray-500 mt-4">We translate opportunities across borders and cultures.</p>
-            </div>
-            <div class="flex items-end"><div class="text-4xl font-bold heading-font text-[#0a2540]">Strategic Planning &amp; Negotiations</div></div>
-        </div>
-        <!-- Home gallery / proof-of-existence -->
-        <div class="max-w-screen-2xl mx-auto px-8 py-8">
-            <h3 class="text-lg font-semibold mb-4">On-the-ground work</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <button class="photoThumb" data-src="assets/photo1.jpg" aria-label="Photo 1"><img src="assets/photo1.jpg" alt="Site image 1" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/></button>
-                <button class="photoThumb" data-src="assets/photo2.jpg" aria-label="Photo 2"><img src="assets/photo2.jpg" alt="Site image 2" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/></button>
-                <button class="photoThumb" data-src="assets/photo3.jpg" aria-label="Photo 3"><img src="assets/photo3.jpg" alt="Site image 3" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/></button>
-                <button class="photoThumb" data-src="assets/photo4.jpg" aria-label="Photo 4"><img src="assets/photo4.jpg" alt="Site image 4" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- WHAT WE DO -->
-    <section id="what-we-do" class="page max-w-screen-2xl mx-auto px-8 py-20">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-            <div>
-                <span class="uppercase text-xs font-semibold tracking-widest text-emerald-600">OUR APPROACH</span>
-                <h2 class="text-5xl font-bold heading-font tracking-tighter">What We Do</h2>
-            </div>
-            <p class="max-w-md text-gray-600">We deliver end-to-end strategic support — from market entry to deal closure and value realisation.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Market Strategy -->
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
-                <div class="text-emerald-600 text-sm font-semibold mb-4">01 • MARKET STRATEGY</div>
-                <h3 class="text-3xl font-semibold mb-8">Position for success</h3>
-                <ul class="space-y-6">
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">01</span><div><div class="font-medium">Competitive environment</div><div class="text-sm text-gray-500">Deep analysis of market dynamics</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">02</span><div><div class="font-medium">Strategic positioning</div><div class="text-sm text-gray-500">Define your unique edge</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">03</span><div><div class="font-medium">Portfolio management</div><div class="text-sm text-gray-500">Optimise your project pipeline</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">04</span><div><div class="font-medium">Partnerships across the supply chain</div><div class="text-sm text-gray-500">Build resilient alliances</div></div></li>
-                </ul>
-            </div>
-
-            <!-- Value Enhancement -->
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
-                <div class="text-emerald-600 text-sm font-semibold mb-4">02 • VALUE ENHANCEMENT</div>
-                <h3 class="text-3xl font-semibold mb-8">Unlock hidden value</h3>
-                <ul class="space-y-6">
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">01</span><div><div class="font-medium">Value-in-use &amp; downstream process improvements</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">02</span><div><div class="font-medium">Differentiation</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">03</span><div><div class="font-medium">Pricing optimization</div></div></li>
-                </ul>
-                <!-- Generic graph visual -->
-                <div class="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                    <div class="text-xs font-medium mb-4 flex justify-between"><span>VALUE CREATION</span><span class="text-emerald-600">+42%</span></div>
-                    <div class="h-48 bg-gradient-to-r from-emerald-400 to-[#0a2540] rounded-2xl relative flex items-end justify-around p-4" aria-hidden="true">
-                        <div class="w-8 bg-white/30 rounded-t h-1/3"></div>
-                        <div class="w-8 bg-white/30 rounded-t h-2/3"></div>
-                        <div class="w-8 bg-white/30 rounded-t h-4/5"></div>
-                        <div class="w-8 bg-white/30 rounded-t h-full flex items-center justify-center text-xs font-bold">Target</div>
+                <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
+                    <div class="text-emerald-600 text-sm font-semibold mb-4">03 • DEPLOYMENT</div>
+                    <h3 class="text-3xl font-semibold mb-8">Execute with precision</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">01</span><div class="min-w-0"><div class="font-medium">Market plan &amp; KAM</div><div class="text-sm text-gray-500">Key Account Management</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">02</span><div class="min-w-0"><div class="font-medium">Technical selling and negotiations</div></div></li>
+                        <li class="flex gap-x-4 items-start"><span class="font-mono text-2xl font-light text-gray-300 flex-shrink-0">03</span><div class="min-w-0"><div class="font-medium">Monitoring and continuous improvement</div></div></li>
+                    </ul>
+                    <div class="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6 text-center" aria-hidden="true">
+                        <div class="text-xs uppercase tracking-widest mb-3">NEGOTIATION SUCCESS CYCLE</div>
+                        <div class="flex justify-center gap-x-8 text-5xl text-gray-300"><i class="fas fa-sync-alt"></i></div>
+                        <p class="text-xs text-gray-500 mt-4">Plan • Negotiate • Execute • Improve</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Deployment -->
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 card-hover">
-                <div class="text-emerald-600 text-sm font-semibold mb-4">03 • DEPLOYMENT</div>
-                <h3 class="text-3xl font-semibold mb-8">Execute with precision</h3>
-                <ul class="space-y-6">
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">01</span><div><div class="font-medium">Market plan &amp; KAM</div><div class="text-sm text-gray-500">Key Account Management</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">02</span><div><div class="font-medium">Technical selling and negotiations</div></div></li>
-                    <li class="flex gap-x-4"><span class="font-mono text-2xl font-light text-gray-300">03</span><div><div class="font-medium">Monitoring and continuous improvement</div></div></li>
-                </ul>
-                <!-- Generic visual -->
-                <div class="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6 text-center" aria-hidden="true">
-                    <div class="text-xs uppercase tracking-widest mb-3">NEGOTIATION SUCCESS CYCLE</div>
-                    <div class="flex justify-center gap-x-8 text-5xl text-gray-300"><i class="fas fa-sync-alt" aria-hidden="true"></i></div>
-                    <p class="text-xs text-gray-500 mt-4">Plan • Negotiate • Execute • Improve</p>
+            <!-- Project snapshots — inside what-we-do section -->
+            <div class="mt-12">
+                <h3 class="text-lg font-semibold mb-4">Project snapshots</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <img src="assets/photo6.jpg" alt="Project site visit" style="width:100%;height:220px;object-fit:cover;border-radius:12px"/>
+                    <img src="assets/photo7.jpg" alt="Technology inspection" style="width:100%;height:220px;object-fit:cover;border-radius:12px"/>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- What-we-do small gallery -->
-    <div class="max-w-screen-2xl mx-auto px-8 py-8">
-        <h3 class="text-lg font-semibold mb-4">Project snapshots</h3>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <button class="photoThumb" data-src="assets/photo5.jpg" aria-label="Project 1"><img src="assets/photo5.jpg" alt="Project 1" style="width:100%;height:160px;object-fit:cover;border-radius:8px"/></button>
-            <button class="photoThumb" data-src="assets/photo6.jpg" aria-label="Project 2"><img src="assets/photo6.jpg" alt="Project 2" style="width:100%;height:160px;object-fit:cover;border-radius:8px"/></button>
-            <button class="photoThumb" data-src="assets/photo7.jpg" aria-label="Project 3"><img src="assets/photo7.jpg" alt="Project 3" style="width:100%;height:160px;object-fit:cover;border-radius:8px"/></button>
-        </div>
-    </div>
-
-    <!-- CLIENTS -->
+    <!-- ======== CLIENTS ======== -->
     <section id="clients" class="page bg-gray-50 py-20" aria-labelledby="clients-heading">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="flex justify-between items-end mb-12">
@@ -263,20 +240,18 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Who are our clients -->
                 <div class="bg-white rounded-3xl p-8">
                     <h3 class="text-2xl font-semibold mb-6">Who are our clients?</h3>
                     <div class="space-y-8">
-                        <div class="flex gap-6"><div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl" aria-hidden="true">💰</div><div><div class="font-medium">Investors looking for quality projects in the region we cover</div></div></div>
-                        <div class="flex gap-6"><div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl" aria-hidden="true">🏗️</div><div><div class="font-medium">Project developers looking for capital or strategic partnerships</div></div></div>
-                        <div class="flex gap-6"><div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl" aria-hidden="true">🔧</div><div><div class="font-medium">Project developers looking for sourcing leads and supervision to locally source technology and equipment</div></div></div>
+                        <div class="flex gap-6 items-start"><div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl" aria-hidden="true">💰</div><div class="min-w-0"><div class="font-medium">Investors looking for quality projects in the region we cover</div></div></div>
+                        <div class="flex gap-6 items-start"><div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl" aria-hidden="true">🏗️</div><div class="min-w-0"><div class="font-medium">Project developers looking for capital or strategic partnerships</div></div></div>
+                        <div class="flex gap-6 items-start"><div class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl" aria-hidden="true">🔧</div><div class="min-w-0"><div class="font-medium">Project developers looking for sourcing leads and supervision to locally source technology and equipment</div></div></div>
                     </div>
                 </div>
 
-                <!-- Recent work -->
                 <div class="bg-white rounded-3xl p-8">
                     <h3 class="text-2xl font-semibold mb-8">Some recent work done for our clients</h3>
-                    <div class="space-y-6 text-sm">
+                    <div class="space-y-6 text-sm font-normal">
                         <div class="border-l-2 border-[#0a2540] pl-6">Identified and helped with negotiations for the development of a large <strong>Silica sand project in North East Australia</strong></div>
                         <div class="border-l-2 border-[#0a2540] pl-6">Provided Middle East investor leads to a USA-based project looking for capital</div>
                         <div class="border-l-2 border-[#0a2540] pl-6">Co-ordinated the technical evaluation work for a high purity quartz project in Iraq</div>
@@ -284,24 +259,39 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Client site visits — 3 photos only, inside clients section -->
+            <div class="mt-12">
+                <h3 class="text-lg font-semibold mb-4">Client site visits</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <img src="assets/photo8.jpg" alt="Client site visit 1" style="width:100%;height:200px;object-fit:cover;border-radius:12px"/>
+                    <img src="assets/photo9.jpg" alt="Client site visit 2" style="width:100%;height:200px;object-fit:cover;border-radius:12px"/>
+                    <img src="assets/photo10.jpg" alt="Client site visit 3" style="width:100%;height:200px;object-fit:cover;border-radius:12px"/>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- GET IN TOUCH -->
-    <section id="get-in-touch" class="page max-w-screen-2xl mx-auto px-8 py-20 bg-[#0a2540] text-white">
-        <div class="grid md:grid-cols-12 gap-12">
+    <!-- ======== GET IN TOUCH ======== -->
+    <section id="get-in-touch" class="page bg-[#0a2540] text-white">
+        <div class="max-w-screen-2xl mx-auto px-8 py-20 grid md:grid-cols-12 gap-12">
             <div class="md:col-span-5">
                 <h2 class="text-5xl font-bold heading-font tracking-tighter mb-6">Let's build something exceptional together</h2>
                 <p class="text-gray-300 text-xl">Whether you're an investor, project developer, or technology provider — we're ready to help you succeed across Asia and the Middle East.</p>
                 <div class="mt-12 border border-white/20 rounded-3xl p-8">
-                    <div class="flex items-center gap-x-4"><i class="fas fa-envelope text-3xl" aria-hidden="true"></i><div><div class="text-xs text-gray-400">DIRECT EMAIL</div><a href="mailto:info@be212advisory.com" class="text-2xl font-medium hover:underline">info@be212advisory.com</a></div></div>
+                    <div class="flex items-center gap-x-4">
+                        <i class="fas fa-envelope text-3xl" aria-hidden="true"></i>
+                        <div>
+                            <div class="text-xs text-gray-400">DIRECT EMAIL</div>
+                            <a href="mailto:info@be212advisory.com" class="text-2xl font-medium hover:underline">info@be212advisory.com</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Contact Form -->
             <div class="md:col-span-7 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12">
                 <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-8" novalidate>
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="text-xs font-medium uppercase tracking-widest block mb-2">Your name <span class="sr-only">(required)</span></label>
                             <input name="name" type="text" id="name" required placeholder="e.g. Jane Doe" autocomplete="name"
@@ -326,9 +316,7 @@
                                   class="w-full bg-white/10 border border-white/30 focus:border-white rounded-3xl px-6 py-5 outline-none text-white placeholder:text-gray-400 resize-none"></textarea>
                         <div id="messageError" class="text-xs text-rose-400 mt-2 sr-only" aria-live="polite"></div>
                     </div>
-
                     <div id="formMessage" role="status" aria-live="polite" class="sr-only"></div>
-
                     <button type="submit" id="submitBtn" class="w-full bg-white text-[#0a2540] py-5 rounded-3xl font-semibold text-lg hover:bg-emerald-400 hover:text-white transition-all flex items-center justify-center gap-x-3 focus-ring">
                         <span id="submitBtnText">Send message</span>
                         <i class="fas fa-paper-plane" aria-hidden="true"></i>
@@ -338,26 +326,24 @@
         </div>
     </section>
 
-    <!-- Clients gallery -->
-    <div class="max-w-screen-2xl mx-auto px-8 py-8 bg-gray-50">
-        <h3 class="text-lg font-semibold mb-4">Client site visits</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button class="photoThumb" data-src="assets/photo8.jpg" aria-label="Client 1"><img src="assets/photo8.jpg" alt="Client 1" style="width:100%;height:120px;object-fit:cover;border-radius:8px"/></button>
-            <button class="photoThumb" data-src="assets/photo9.jpg" aria-label="Client 2"><img src="assets/photo9.jpg" alt="Client 2" style="width:100%;height:120px;object-fit:cover;border-radius:8px"/></button>
-            <button class="photoThumb" data-src="assets/photo10.jpg" aria-label="Client 3"><img src="assets/photo10.jpg" alt="Client 3" style="width:100%;height:120px;object-fit:cover;border-radius:8px"/></button>
-            <button class="photoThumb" data-src="assets/photo11.jpg" aria-label="Client 4"><img src="assets/photo11.jpg" alt="Client 4" style="width:100%;height:120px;object-fit:cover;border-radius:8px"/></button>
-        </div>
-    </div>
-
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-white border-t py-12" role="contentinfo">
         <div class="max-w-screen-2xl mx-auto px-8 text-sm">
             <div class="flex flex-col md:flex-row justify-between items-center gap-y-6">
-                <div class="flex items-center gap-x-3"><div class="w-6 h-6 bg-[#0a2540] rounded-2xl flex items-center justify-center text-white text-xl">B</div><div class="heading-font text-xl">Be212 Pte Ltd</div></div>
+                <div class="flex items-center gap-x-3">
+                    <div class="w-6 h-6 bg-[#0a2540] rounded-2xl flex items-center justify-center text-white text-xl">B</div>
+                    <div class="heading-font text-xl">Be212 Pte Ltd</div>
+                </div>
                 <div class="text-center md:text-right text-gray-500">© 2026 Be212 Pte Ltd. All Rights Reserved.<br>Strategic Planning &amp; Negotiations • Since 2015</div>
-                <div class="flex gap-x-8 text-gray-400"><a href="#" class="hover:text-gray-700">Privacy</a><a href="#" class="hover:text-gray-700">Terms</a><a href="https://www.linkedin.com/company/be212-pte-ltd" target="_blank" rel="noopener noreferrer" class="hover:text-gray-700"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a></div>
+                <div class="flex gap-x-8 text-gray-400">
+                    <a href="#" class="hover:text-gray-700">Privacy</a>
+                    <a href="#" class="hover:text-gray-700">Terms</a>
+                    <a href="https://www.linkedin.com/company/be212-pte-ltd" target="_blank" rel="noopener noreferrer" class="hover:text-gray-700">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -367,58 +353,40 @@
             const menu = document.getElementById('mobileMenu');
             const btn = document.getElementById('mobileMenuButton');
             const isHidden = menu.classList.toggle('hidden');
-            // Update aria-expanded to reflect state
             btn.setAttribute('aria-expanded', String(!isHidden));
         }
 
-        // Show only the named page (home, what-we-do, clients, get-in-touch)
         function showPage(name) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.style.display = 'none');
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.style.display = 'none';
+            });
+            // Show the requested page
+            const target = document.getElementById(name);
+            if (target) target.style.display = 'block';
 
-            // Show the main section
-            const main = document.getElementById(name);
-            if (main) main.style.display = '';
-
-            // For home, also show sectors
-            if (name === 'home') {
-                const sectors = document.getElementById('sectors');
-                if (sectors) sectors.style.display = '';
-            }
-
-            // Close mobile menu if open
+            // Close mobile menu
             const mobileMenu = document.getElementById('mobileMenu');
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
-                const btn = document.getElementById('mobileMenuButton'); if (btn) btn.setAttribute('aria-expanded','false');
+                const btn = document.getElementById('mobileMenuButton');
+                if (btn) btn.setAttribute('aria-expanded','false');
             }
-
-            // Update focus for accessibility
-            setTimeout(() => {
-                const heading = main ? main.querySelector('h1, h2') : null;
-                if (heading) heading.setAttribute('tabindex','-1');
-                if (heading) heading.focus();
-            }, 50);
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
         function navigateToSection(section) {
-            // update hash which triggers show via hashchange listener
             window.location.hash = section;
         }
 
-        // On hash change, show the appropriate page
         window.addEventListener('hashchange', () => {
             const name = window.location.hash.replace('#','') || 'home';
             showPage(name);
         });
 
-        // On initial load, show the page from hash or default to home
         document.addEventListener('DOMContentLoaded', () => {
             const initial = window.location.hash.replace('#','') || 'home';
-            // hide all pages first
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            // ensure sectors hidden unless home
-            const sectors = document.getElementById('sectors'); if (sectors) sectors.style.display = 'none';
             showPage(initial);
         });
 
@@ -426,7 +394,6 @@
             const region = document.getElementById('formMessage');
             region.classList.remove('sr-only');
             region.textContent = message;
-            // Simple styling change: use inline aria-label to indicate severity
             region.setAttribute('data-type', type);
         }
 
@@ -458,7 +425,6 @@
             const btn = document.getElementById('submitBtn');
             const btnText = document.getElementById('submitBtnText');
 
-            // Client-side validation with user-friendly messages
             const nameOk = validateField(name, 'nameError', 'Please enter your name');
             const emailOk = validateField(email, 'emailError', 'Please enter a valid email address');
             const messageOk = validateField(message, 'messageError', 'Please include a short project brief');
@@ -467,67 +433,18 @@
                 return;
             }
 
-            // Disable the button and show an accessible spinner state
             btn.disabled = true;
-            const spinner = document.createElement('svg');
-            spinner.setAttribute('class', 'animate-spin h-5 w-5 mr-3');
-            spinner.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-            spinner.setAttribute('viewBox', '0 0 24 24');
-            spinner.innerHTML = '<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>';
             btnText.textContent = 'Sending...';
-            btn.prepend(spinner);
 
-            // Simulate async send; replace this with real XHR/fetch POST in production
             setTimeout(() => {
-                // Show inline success message (accessible)
                 setFormMessage('Thank you — your message has been received. We will reply within 24 hours.', 'success');
                 form.reset();
-                // restore button
-                btn.removeChild(spinner);
                 btnText.textContent = 'Send message';
                 btn.disabled = false;
             }, 1200);
         }
 
-        // Helpful console message (no marketing claims)
         console.log('%cBe212 page loaded', 'background:#0a2540;color:white;padding:2px 6px;border-radius:4px');
-
-        // No-op initializer kept for parity
-        window.onload = function() {};
-
-        // Detect if Tailwind (or CSS) failed to load by testing a utility class
-        (function detectStyles(){
-            try {
-                const probe = document.createElement('div');
-                probe.className = 'hidden md:block bg-[#0a2540]';
-                probe.style.position = 'absolute'; probe.style.left = '-9999px';
-                document.body.appendChild(probe);
-                const cs = window.getComputedStyle(probe);
-                const bg = cs.backgroundColor || cs.background;
-                document.body.removeChild(probe);
-
-                // If background color is not set, styles probably didn't load
-                if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
-                    const w = document.getElementById('styleWarning');
-                    if (w) w.style.display = 'block';
-                }
-            } catch (e) {
-                // fail safe: show the banner
-                const w = document.getElementById('styleWarning'); if (w) w.style.display = 'block';
-            }
-        })();
-
-        // Banner button handlers
-        document.addEventListener('DOMContentLoaded', () => {
-            const open = document.getElementById('openReadme');
-            const startBtn = document.getElementById('startServerBtn');
-            const dismiss = document.getElementById('dismissWarning');
-            if (open) open.addEventListener('click', () => { window.open('README_RUN_AXE.md', '_blank'); });
-            if (dismiss) dismiss.addEventListener('click', () => { document.getElementById('styleWarning').style.display='none'; });
-            if (startBtn) startBtn.addEventListener('click', () => {
-                alert('To start a local server from PowerShell, open PowerShell in this folder and run: .\\start-server.ps1\nIf you want, run .\\setup_and_run.ps1 instead to download axe and start a server.');
-            });
-        });
     </script>
 </body>
 </html>
